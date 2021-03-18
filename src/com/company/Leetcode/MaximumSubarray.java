@@ -20,7 +20,7 @@ Input: nums = [5,4,-1,7,8]
 Output: 23
  */
 
-public class MaximumSubArray {
+public class MaximumSubarray {
     public static int solution(int[] nums) {
         int total = nums[0];
         int subSum = 0;
