@@ -5,6 +5,7 @@ public class Land {
     public static int depth;
     public static int breadth;
     public static int sol;
+
     public static int solution(int[][] land) {
         depth = land.length;
         breadth = land[0].length;
