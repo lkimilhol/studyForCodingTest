@@ -4,30 +4,14 @@ import java.util.Stack;
 
 public class CorrectParenthesis {
     boolean solution(String s) {
-        final char OPEN = '(';
-
         Stack<Character> stack = new Stack<>();
 
-        for (int i = 0; i < s.length(); i++) {
-            char item = s.charAt(i);
-
-            if (item == OPEN) {
-                stack.push(item);
-                continue;
+        for (char c : s.toCharArray()) {
+            if (!stack.isEmpty() && (stack.peek() == '(' && c == ')')) {
+                stack.pop();
             }
-
-            if (stack.empty()) {
-                stack.push(item);
-                continue;
-            }
-
-            char tmp = stack.pop();
-            if (tmp != OPEN) {
-                stack.push(tmp);
-                stack.push(item);
-            }
+            else stack.push(c);
         }
-
-        return stack.empty();
+        return stack.isEmpty();
     }
 }
