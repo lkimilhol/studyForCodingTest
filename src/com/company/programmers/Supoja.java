@@ -15,6 +15,8 @@ public class Supoja {
         int studentAnswer2 = 0;
         int studentAnswer3 = 0;
 
+        List<Integer> result = new ArrayList<>();
+
         for (int i = 0; i < answers.length; i++) {
             if (answers[i] == student1[i % student1.length]) {
                 studentAnswer1++;
@@ -27,32 +29,18 @@ public class Supoja {
             }
         }
 
-        if (studentAnswer1 > studentAnswer2 && studentAnswer1 > studentAnswer3) {
-            return new int[]{1};
+        int topScore = Math.max(studentAnswer1, Math.max(studentAnswer2, studentAnswer3));
+
+        if (topScore == studentAnswer1) {
+            result.add(1);
         }
-        if (studentAnswer2 > studentAnswer1 && studentAnswer2 > studentAnswer3) {
-            return new int[]{2};
+        if (topScore == studentAnswer2) {
+            result.add(2);
         }
-        if (studentAnswer3 > studentAnswer1 && studentAnswer3 > studentAnswer2) {
-            return new int[]{3};
+        if (topScore == studentAnswer3) {
+            result.add(3);
         }
 
-        if (studentAnswer1 == studentAnswer2 && studentAnswer2 == studentAnswer3) {
-            return new int[]{1, 2, 3,};
-        }
-
-        if (studentAnswer1 == studentAnswer2) {
-            return new int[]{1, 2};
-        }
-
-        if (studentAnswer2 == studentAnswer3) {
-            return new int[]{2, 3};
-        }
-
-        if (studentAnswer1 == studentAnswer3) {
-            return new int[]{1, 3};
-        }
-
-        return new int[]{};
+        return result.stream().mapToInt(i -> i).toArray();
     }
 }
