@@ -8,7 +8,7 @@ public class Brackets {
 
         for (int i = 0; i < S.length(); i++) {
             if (stack.isEmpty()) {
-                stack.add(S.charAt(i));
+                stack.push(S.charAt(i));
                 continue;
             }
 
@@ -19,7 +19,7 @@ public class Brackets {
                 continue;
             }
 
-            stack.add(S.charAt(i));
+            stack.push(S.charAt(i));
         }
 
         return stack.isEmpty() ? 1 : 0;
