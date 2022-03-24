@@ -6,10 +6,10 @@ public class FindPrimeNumber {
     private static final Set<Integer> PRIME = new HashSet<>();
 
     public static int solution(String numbers) {
-        String[] newNumbers = numbers.split("");
+        String[] numberArr = numbers.split("");
 
-        for (int r = 1; r <= newNumbers.length; r++) {
-            permutation(newNumbers, 0, newNumbers.length, r);
+        for (int r = 1; r <= numberArr.length; r++) {
+            permutation(numberArr, 0, numberArr.length, r);
         }
 
         return PRIME.size();
@@ -42,10 +42,10 @@ public class FindPrimeNumber {
         return Integer.parseInt(s.toString());
     }
 
-    private static void swap(String[] arr, int depth, int i) {
-        String temp = arr[depth];
-        arr[depth] = arr[i];
-        arr[i] = temp;
+    private static void swap(String[] numberArr, int depth, int i) {
+        String temp = numberArr[depth];
+        numberArr[depth] = numberArr[i];
+        numberArr[i] = temp;
     }
 
     private static boolean isPrime(int number) {
