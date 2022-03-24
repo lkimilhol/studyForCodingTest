@@ -6,33 +6,50 @@ public class FindPrimeNumber {
     private static final Set<Integer> PRIME = new HashSet<>();
 
     public static int solution(String numbers) {
+        String[] newNumbers = numbers.split("");
 
-        boolean[] visited = new boolean[numbers.length()];
-
-        for (int r = 1; r <= numbers.length(); r++) {
-            combination(numbers, visited, 0, r);
+        for (int r = 1; r <= newNumbers.length; r++) {
+            permutation(newNumbers, 0, newNumbers.length, r);
         }
 
         return PRIME.size();
     }
 
-    private static void combination(String numbers, boolean[] visited, int start, int r) {
-        if (r == 0) {
-            int number = parseInt(numbers, visited);
+    private static void permutation(String[] arr, int depth, int n, int r) {
+        if (depth == r) {
+            int number = parseInt(arr, r);
+
             if (isPrime(number)) {
                 PRIME.add(number);
             }
+            return;
         }
 
-        for (int i = start; i < numbers.length(); i++) {
-            visited[i] = true;
-            combination(numbers, visited, i + 1, r - 1);
-            visited[i] = false;
+        for (int i = depth; i < n; i++) {
+            swap(arr, depth, i);
+            permutation(arr, depth + 1, n, r);
+            swap(arr, depth, i);
         }
     }
 
+    private static int parseInt(String[] arr, int r) {
+        StringBuilder s = new StringBuilder();
+
+        for (int i = 0; i < r; i++) {
+            s.append(arr[i]);
+        }
+
+        return Integer.parseInt(s.toString());
+    }
+
+    private static void swap(String[] arr, int depth, int i) {
+        String temp = arr[depth];
+        arr[depth] = arr[i];
+        arr[i] = temp;
+    }
+
     private static boolean isPrime(int number) {
-        if (number == 0) {
+        if (number == 0 || number == 1) {
             return false;
         }
 
@@ -42,17 +59,5 @@ public class FindPrimeNumber {
             }
         }
         return true;
-    }
-
-    private static int parseInt(String numbers, boolean[] visited) {
-        StringBuilder result = new StringBuilder();
-
-        for (int i = 0; i < numbers.length(); i++) {
-            if (visited[i]) {
-                result.append(numbers.charAt(i));
-            }
-        }
-
-        return Integer.parseInt(result.toString());
     }
 }
