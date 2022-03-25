@@ -5,21 +5,26 @@ public class Carpet {
         int[] answer = new int[2];
 
         int total = brown + yellow;
-        int a = (int) Math.sqrt(total);
-        int b = 0;
+
+        int a = brown / 2;
+        int b;
+
         while (true) {
             if (total % a == 0) {
                 b = total / a;
                 if ((a - 2) * (b - 2) != yellow) {
-                    a++;
+                    a--;
                     continue;
                 }
                 break;
             }
-            a++;
+
+            a--;
         }
-        answer[0] = Math.max(a, b);
-        answer[1] = Math.min(a, b);
+
+        answer[0] = a;
+        answer[1] = b;
+
         return answer;
     }
 }
