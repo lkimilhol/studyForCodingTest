@@ -5,21 +5,21 @@ import java.util.Arrays;
 public class Lifeboat {
     public int solution(int[] people, int limit) {
         Arrays.sort(people);
-        int start = 0;
-        int cnt = 0;
+        int withIndex = 0;
+        int answer = 0;
 
         for (int i = people.length - 1; i >= 0; i--) {
             if (people[i] == 0) {
                 continue;
             }
 
-            if (people[i] + people[start] <= limit) {
-                people[start] = 0;
-                start++;
+            if (people[i] + people[withIndex] <= limit) {
+                people[withIndex] = 0;
+                withIndex++;
             }
-            cnt++;
+            answer++;
         }
 
-        return cnt;
+        return answer;
     }
 }
