@@ -29,7 +29,7 @@ public class ConnectIsland {
         return answer;
     }
 
-    public int find(int connectedNode) {
+    private int find(int connectedNode) {
         if (vertexes[connectedNode] == connectedNode) {
             return connectedNode;
         }
