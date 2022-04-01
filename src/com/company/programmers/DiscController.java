@@ -20,8 +20,7 @@ public class DiscController {
                 continue;
             }
 
-            int i = job[0] - time;
-            total += i;
+            time += job[0] - time;
             time += job[1];
             total += time - job[0];
         }
