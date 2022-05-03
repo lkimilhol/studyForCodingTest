@@ -2,55 +2,38 @@ package com.company.Leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GroupAnagrams {
-    private static final String DONE = "DONE";
+    private HashMap<String, List<String>> hashMap = new HashMap<>();
 
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> answers = new ArrayList<>();
 
-        for (int i = 0; i < strs.length; i++) {
-            if (strs[i].equals(DONE)) {
-                continue;
-            }
+        for (String str : strs) {
+            sorting(str);
+        }
 
-            List<String> answer = new ArrayList<>();
-            answer.add(strs[i]);
-
-            for (int j = i; j < strs.length ; j++) {
-                if (i == j || strs[j].equals(DONE)) {
-                    continue;
-                }
-
-                if (isSame(strs[i], strs[j])) {
-                    answer.add(strs[j]);
-                    strs[j] = DONE;
-                }
-            }
-
-            answers.add(answer);
+        for (Map.Entry<String, List<String>> entry : hashMap.entrySet()) {
+            answers.add(entry.getValue());
         }
 
         return answers;
     }
 
-    private boolean isSame(String origin, String target) {
-        if (origin.length() != target.length()) {
-            return false;
-        }
-
-        char[] baseValue = origin.toCharArray();
-        Arrays.sort(baseValue);
-
+    private void sorting(String target) {
         char[] compareToValue = target.toCharArray();
         Arrays.sort(compareToValue);
+        String sortedTarget = new String(compareToValue);
 
-        for (int i = 0; i < baseValue.length; i++) {
-            if (baseValue[i] != compareToValue[i]) {
-                return false;
-            }
+        if (hashMap.containsKey(sortedTarget)) {
+            List<String> strings = hashMap.get(sortedTarget);
+            strings.add(target);
+            return;
         }
-        return true;
+
+        hashMap.put(sortedTarget, new ArrayList<>(List.of(target)));
     }
 }
